@@ -8,6 +8,7 @@ use ReflectionClass;
 use ReflectionNamedType;
 
 use Framework\Exceptions\ContainerException;
+use App\Middleware\{AuthRequiredMiddleware, GuestOnlyMiddleware};
 
 class container
 {
@@ -81,7 +82,7 @@ class container
 
         $factory = $this->definitions[$id];
 
-        $dependency = $factory();
+        $dependency = $factory($this);
 
         $this->resolved[$id] = $dependency;
 
